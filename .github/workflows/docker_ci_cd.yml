@@ -34,7 +34,7 @@ jobs:
       
     - name: Check Model Accuracy
       run: |
-        python tests/test_model.py
+        python test/test_model.py
 
     - name: Build Docker Image
       run: docker build -t cancer-ml .
