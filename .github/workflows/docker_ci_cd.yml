@@ -30,7 +30,7 @@ jobs:
 
     - name: Run Tests
       run: |
-        pytest tests/
+        pytest test/
       
     - name: Check Model Accuracy
       run: |
