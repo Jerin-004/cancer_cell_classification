@@ -1,4 +1,4 @@
-name: Cancer ML CI
+name: Cancer ML CI/CD DOCKER
 
 on:
   push:
