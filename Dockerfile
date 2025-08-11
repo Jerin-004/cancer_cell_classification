@@ -9,4 +9,4 @@ COPY . .
 
 EXPOSE 5000
 
-CMD ["python", "model/train.py"]
+CMD ["python", "app.py"]
