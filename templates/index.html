@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cancer Cell Classifier</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f9f9f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        form {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            max-width: 800px;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        label {
+            font-size: 14px;
+            color: #555;
+        }
+
+        input {
+            padding: 8px;
+            font-size: 14px;
+        }
+
+        .submit-btn {
+            grid-column: span 2;
+            padding: 12px;
+            font-size: 16px;
+            background: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background: #0056b3;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 22px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .benign {
+            color: green;
+        }
+
+        .malignant {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cancer Cell Classifier</h1>
+    <form method="POST" action="/predict">
+        {% for i in range(30) %}
+            <label>{{ feature_names[i] }}</label>
+            <input type="number" step="any" name="feature{{ i }}" required>
+        {% endfor %}
+        <button class="submit-btn" type="submit">Predict</button>
+    </form>
+
+    {% if prediction_text %}
+        <div class="result {% if 'Malignant' in prediction_text %}malignant{% else %}benign{% endif %}">
+            {{ prediction_text }}
+        </div>
+    {% endif %}
+</body>
+</html>
