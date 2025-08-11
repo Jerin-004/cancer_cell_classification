@@ -40,4 +40,4 @@ jobs:
       run: docker build -t cancer-ml .
 
     - name: Run Docker Container for Verification
-      run: docker run cancer-ml
+      run: docker run -p 5000:5000 cancer-ml
