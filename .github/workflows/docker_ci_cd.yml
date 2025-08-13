@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build-and-test:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -25,16 +25,22 @@ jobs:
         pip install -r requirements.txt
 
     - name: Train the Model
-      run: |
-        python model/train.py
+      run: python model/train.py
 
     - name: Run Tests
-      run: |
-        pytest test/
-      
+      run: pytest test/
+
     - name: Check Model Accuracy
-      run: |
-        python test/test_model.py
+      run: python test/test_model.py
+
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build Docker Image
-      run: docker build -t cancer-ml .
+      run: docker build -t jerinstalin004/cancer-ml:latest .
+
+    - name: Push Docker Image
+      run: docker push jerinstalin004/cancer-ml:latest
